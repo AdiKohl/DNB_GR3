@@ -333,21 +333,21 @@ public class DnBController {
             System.out.println("Listener Started!");
             while(true){
                 try{
-                    if(client!=null){
+                    //if(client!=null){
                     String line = client.getInStream().readLine();
                     int x = Integer.parseInt(line);
                     System.out.println("Empfangen..." + x);
                     line = client.getInStream().readLine();
                     int y = Integer.parseInt(line);
                     evaluateClick(x,y);
-                    }
+                    /*}
                     if(server!=null){
                     String line = server.getInStream().readLine();
                     int x = Integer.parseInt(line);
                     line = server.getInStream().readLine();
                     int y = Integer.parseInt(line);
                     evaluateClick(x,y);
-                    }
+                    }*/
                     
                     
                     
