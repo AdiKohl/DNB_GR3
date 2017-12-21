@@ -280,6 +280,10 @@ public class DnBController {
         public void actionPerformed(ActionEvent e) {
         server = new Server(menu.getMultiFrame().getPort());
         System.out.println("Client connected");
+        if(menu.getMainFrame()==null) menu.setMainFrame(new MainFrame());
+        menu.getMainFrame().setVisible(true);
+        menu.getMultiFrame().setVisible(false);
+        addSingleListener();
         }
     } 
 
@@ -287,6 +291,10 @@ public class DnBController {
         public void actionPerformed(ActionEvent e) {
         client = new Client(menu.getMultiFrame().getPort(), menu.getMultiFrame().getIP());
         System.out.println("Joined!");
+        if(menu.getMainFrame()==null) menu.setMainFrame(new MainFrame());
+        menu.getMainFrame().setVisible(true);
+        menu.getMultiFrame().setVisible(false);
+        addSingleListener();
         }
     } 
     
