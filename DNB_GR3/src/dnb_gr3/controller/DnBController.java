@@ -319,6 +319,7 @@ public class DnBController {
         menu.getMainFrame().setVisible(true);
         menu.getMultiFrame().setVisible(false);
         addSingleListener();
+        playerPlaying = Owner.HOST;
         }
     } 
     
