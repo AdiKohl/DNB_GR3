@@ -39,6 +39,7 @@ public class DnBController {
     private boolean areaSet = false;
     Client client;
     Server server;
+    NetworkListener nl;
     
 
     public DnBController() {
@@ -48,6 +49,7 @@ public class DnBController {
         //EventQueue.invokeLater(() -> new MenuFrame());
         this.menu = new MenuFrame();
         addMenuListeners();
+        
         //this.map.setArea(2,1,Owner.GUEST);
         
     }
@@ -293,6 +295,7 @@ public class DnBController {
         public void actionPerformed(ActionEvent e) {
         server = new Server(menu.getMultiFrame().getPort());
         System.out.println("Client connected");
+        nl = new NetworkListener();
         if(menu.getMainFrame()==null) menu.setMainFrame(new MainFrame());
         menu.getMainFrame().setVisible(true);
         menu.getMultiFrame().setVisible(false);
@@ -304,6 +307,7 @@ public class DnBController {
         public void actionPerformed(ActionEvent e) {
         client = new Client(menu.getMultiFrame().getPort(), menu.getMultiFrame().getIP());
         System.out.println("Joined!");
+        nl = new NetworkListener();
         if(menu.getMainFrame()==null) menu.setMainFrame(new MainFrame());
         menu.getMainFrame().setVisible(true);
         menu.getMultiFrame().setVisible(false);
