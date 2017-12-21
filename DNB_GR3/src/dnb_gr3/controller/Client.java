@@ -37,4 +37,22 @@ public class Client{
         }catch(IOException e){
             e.printStackTrace();}      
     }
+
+    public PrintWriter getOutStream() {
+        return outStream;
+    }
+
+    public void setOutStream(PrintWriter outStream) {
+        this.outStream = outStream;
+    }
+
+    public BufferedReader getInStream() {
+        return inStream;
+    }
+
+    public void setInStream(BufferedReader inStream) {
+        this.inStream = inStream;
+    }
+    
+    
 }

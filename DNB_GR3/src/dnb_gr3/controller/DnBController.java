@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import dnb_gr3.model.MapModel;
 import dnb_gr3.model.Owner;
 import dnb_gr3.view.*;
+import java.io.IOException;
 //import prg2hs17_gr3_dnb.view;
 
 /**
@@ -46,6 +47,7 @@ public class DnBController {
         this.menu = new MenuFrame();
         addMenuListeners();
         //this.map.setArea(2,1,Owner.GUEST);
+        
     }
     
     public void evaluateClick(int x, int y){
@@ -153,7 +155,7 @@ public class DnBController {
             }
             else {
                 //put label to guest as winner
-                this.menu.getMainFrame().setEndtext("OPONENT WON!");
+                this.menu.getMainFrame().setEndtext("YOU LOSE!");
             }
         }
         
@@ -256,6 +258,15 @@ public class DnBController {
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
             evaluateClick(e.getX(),e.getY());
+            
+            if(server!=null){
+                server.getOutStream().print(e.getX());
+                server.getOutStream().print(e.getY());
+            }
+            if(client != null) {
+                client.getOutStream().print(e.getX());
+                client.getOutStream().print(e.getY());
+            }
         }
         
     }
@@ -308,4 +319,38 @@ public class DnBController {
     }
     
 
+    class NetworkListener implements Runnable{
+        
+        @Override
+        public void run(){
+            while(true){
+                try{
+                    if(client!=null){
+                    String line = client.getInStream().readLine();
+                    int x = Integer.parseInt(line);
+                    line = client.getInStream().readLine();
+                    int y = Integer.parseInt(line);
+                    evaluateClick(x,y);
+                    }
+                    if(server!=null){
+                    String line = server.getInStream().readLine();
+                    int x = Integer.parseInt(line);
+                    line = server.getInStream().readLine();
+                    int y = Integer.parseInt(line);
+                    evaluateClick(x,y);
+                    }
+                    
+                    
+                    
+                    
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+                
+                 
+                
+            }
+        }
+    }
+    
 }
