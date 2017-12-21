@@ -267,10 +267,12 @@ public class DnBController {
             if(server!=null){
                 server.getOutStream().print(e.getX());
                 server.getOutStream().print(e.getY());
+                server.getOutStream().flush();
             }
             if(client != null) {
                 client.getOutStream().print(e.getX());
                 client.getOutStream().print(e.getY());
+                client.getOutStream().flush();
             }
         }
         
