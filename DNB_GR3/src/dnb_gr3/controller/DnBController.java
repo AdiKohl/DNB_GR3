@@ -329,11 +329,13 @@ public class DnBController {
         
         @Override
         public void run(){
+            System.out.println("Listener Started!");
             while(true){
                 try{
                     if(client!=null){
                     String line = client.getInStream().readLine();
                     int x = Integer.parseInt(line);
+                    System.out.println("Empfangen..." + x);
                     line = client.getInStream().readLine();
                     int y = Integer.parseInt(line);
                     evaluateClick(x,y);
