@@ -17,16 +17,16 @@ import java.net.*;
 public class Client{
     
     private Socket client;
-    private PrintWriter outStream;
-    private BufferedReader inStream;
+    private DataOutputStream outStream;
+    private DataInputStream inStream;
     
     
     public Client (int port, String host){
         try{
             //BufferedReader keyStream = new BufferedReader(new InputStreamReader(System.in));
             client = new Socket(host,port);
-            outStream = new PrintWriter(client.getOutputStream());
-            inStream = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            outStream = new DataOutputStream(client.getOutputStream());
+            inStream = new DataInputStream(new DataInputStream(client.getInputStream()));
             //String line = inStream.readLine();
             //System.out.println(line);
             //line = keyStream.readLine();
@@ -38,19 +38,19 @@ public class Client{
             e.printStackTrace();}      
     }
 
-    public PrintWriter getOutStream() {
+    public DataOutputStream getOutStream() {
         return outStream;
     }
 
-    public void setOutStream(PrintWriter outStream) {
+    public void setOutStream(DataOutputStream outStream) {
         this.outStream = outStream;
     }
 
-    public BufferedReader getInStream() {
+    public DataInputStream getInStream() {
         return inStream;
     }
 
-    public void setInStream(BufferedReader inStream) {
+    public void setInStream(DataInputStream inStream) {
         this.inStream = inStream;
     }
     

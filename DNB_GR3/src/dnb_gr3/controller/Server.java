@@ -14,8 +14,8 @@ import java.io.*;
  */
 public class Server{
     private ServerSocket s;
-    private PrintWriter outStream;
-    private BufferedReader inStream;
+    private DataOutputStream outStream;
+    private DataInputStream inStream;
 
     public Server(int port){
         try{
@@ -23,26 +23,26 @@ public class Server{
             System.out.println("Warten auf Verbindung ...");
             Socket client = s.accept();
             System.out.println(client + " akzeptiert...");
-            outStream = new PrintWriter(client.getOutputStream());
-            inStream = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            outStream = new DataOutputStream(client.getOutputStream());
+            inStream = new DataInputStream(new DataInputStream(client.getInputStream()));
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public PrintWriter getOutStream() {
+    public DataOutputStream getOutStream() {
         return outStream;
     }
 
-    public void setOutStream(PrintWriter outStream) {
+    public void setOutStream(DataOutputStream outStream) {
         this.outStream = outStream;
     }
 
-    public BufferedReader getInStream() {
+    public DataInputStream getInStream() {
         return inStream;
     }
 
-    public void setInStream(BufferedReader inStream) {
+    public void setInStream(DataInputStream inStream) {
         this.inStream = inStream;
     }
     

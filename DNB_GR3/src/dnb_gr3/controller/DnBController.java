@@ -263,16 +263,20 @@ public class DnBController {
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
             evaluateClick(e.getX(),e.getY());
-            
+            try{
             if(server!=null){
-                server.getOutStream().print(e.getX());
-                server.getOutStream().print(e.getY());
-                server.getOutStream().flush();
+                server.getOutStream().writeInt(e.getX());
+                System.out.println(e.getX());
+                server.getOutStream().writeInt(e.getY());
+                //server.getOutStream().flush();
             }
             if(client != null) {
-                client.getOutStream().print(e.getX());
-                client.getOutStream().print(e.getY());
-                client.getOutStream().flush();
+                client.getOutStream().writeInt(e.getX());
+                client.getOutStream().writeInt(e.getY());
+                //client.getOutStream().flush();
+            }
+            }catch(IOException ex){
+                ex.printStackTrace();
             }
         }
         
@@ -335,21 +339,21 @@ public class DnBController {
             System.out.println("Listener Started!");
             while(true){
                 try{
-                    //if(client!=null){
-                    String line = client.getInStream().readLine();
-                    int x = Integer.parseInt(line);
+                    if(client!=null){
+                    int x = client.getInStream().readInt();
+                    //int x = Integer.parseInt(line);
                     System.out.println("Empfangen..." + x);
-                    line = client.getInStream().readLine();
-                    int y = Integer.parseInt(line);
+                    int y = client.getInStream().readInt();
+                    //int y = Integer.parseInt(line);
                     evaluateClick(x,y);
-                    /*}
+                    }
                     if(server!=null){
-                    String line = server.getInStream().readLine();
-                    int x = Integer.parseInt(line);
-                    line = server.getInStream().readLine();
-                    int y = Integer.parseInt(line);
+                    int x = server.getInStream().readInt();
+                    //int x = Integer.parseInt(line);
+                    int y = server.getInStream().readInt();
+                    //int y = Integer.parseInt(line);
                     evaluateClick(x,y);
-                    }*/
+                    }
                     
                     
                     
