@@ -266,7 +266,11 @@ public class DnBController {
         public void mouseEntered(MouseEvent e){}
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
+            
+            if(gamemode == 2){
+                if(playerPlaying == Owner.HOST){
             evaluateClick(e.getX(),e.getY());
+            
             try{
                if(server!=null){
                         server.getOutStream().writeInt(e.getX());
@@ -282,9 +286,16 @@ public class DnBController {
                     }catch(IOException ex){
                         ex.printStackTrace();
                 }
-                
+            
+                }else{
+                    whosTurn(col,row,bor, playerPlaying);
+                }
+                    
+            } else{
+              evaluateClick(e.getX(),e.getY());  
+            }    
              
-            //evaluateClick(e.getX(),e.getY());
+            
             
         }
         
