@@ -40,6 +40,7 @@ public class DnBController {
     Client client;
     Server server;
     NetworkListener nl;
+    private int gamemode; // 1=singleplayer, 2=multiplayer;
     
 
     public DnBController() {
@@ -221,6 +222,7 @@ public class DnBController {
         menu.getMainFrame().setVisible(true);
         menu.setVisible(false);
         addSingleListener();
+        gamemode = 1;
         System.out.println("Singleplayer!");
         }
     }
@@ -231,6 +233,7 @@ public class DnBController {
         menu.getMultiFrame().setVisible(true);
         menu.setVisible(false);
         addMultiListener();
+        gamemode = 2;
         System.out.println("Multiplayer!");
         }
     }
@@ -262,7 +265,14 @@ public class DnBController {
         public void mouseEntered(MouseEvent e){}
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
-            evaluateClick(e.getX(),e.getY());
+            if(gamemode==2){
+                if(playerPlaying==Owner.HOST){
+                    evaluateClick(e.getX(),e.getY());
+                }
+            } else {
+                evaluateClick(e.getX(),e.getY());
+            }
+            //evaluateClick(e.getX(),e.getY());
             try{
             if(server!=null){
                 server.getOutStream().writeInt(e.getX());
