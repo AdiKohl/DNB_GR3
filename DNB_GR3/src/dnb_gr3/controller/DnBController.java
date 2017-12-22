@@ -266,28 +266,29 @@ public class DnBController {
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
             if(gamemode==2){
-                if(playerPlaying==Owner.HOST){
+                if(playerPlaying==Owner.GUEST){
                     evaluateClick(e.getX(),e.getY());
+                    try{
+                    if(server!=null){
+                        server.getOutStream().writeInt(e.getX());
+                        System.out.println(e.getX());
+                        server.getOutStream().writeInt(e.getY());
+                        //server.getOutStream().flush();
+                    }
+                    if(client != null) {
+                        client.getOutStream().writeInt(e.getX());
+                        client.getOutStream().writeInt(e.getY());
+                        //client.getOutStream().flush();
+                    }
+                    }catch(IOException ex){
+                        ex.printStackTrace();
+                    }
                 }
             } else {
                 evaluateClick(e.getX(),e.getY());
             }
             //evaluateClick(e.getX(),e.getY());
-            try{
-            if(server!=null){
-                server.getOutStream().writeInt(e.getX());
-                System.out.println(e.getX());
-                server.getOutStream().writeInt(e.getY());
-                //server.getOutStream().flush();
-            }
-            if(client != null) {
-                client.getOutStream().writeInt(e.getX());
-                client.getOutStream().writeInt(e.getY());
-                //client.getOutStream().flush();
-            }
-            }catch(IOException ex){
-                ex.printStackTrace();
-            }
+            
         }
         
     }
