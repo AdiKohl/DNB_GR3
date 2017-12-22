@@ -85,10 +85,11 @@ public class DnBController {
         
         
         
-        whosTurn(col,row,bor, playerPlaying);
+        //whosTurn(col,row,bor, playerPlaying);
         //whosTurn();
         manipulateModel(col,row,bor,playerPlaying);
         drawView(col,row,bor);
+        whosTurn(col,row,bor, playerPlaying);
         
         
     }
@@ -266,7 +267,7 @@ public class DnBController {
         public void mouseClicked(MouseEvent e){
             System.out.println("that was a click! at x: " + e.getX() + " and y: " + e.getY());
             if(gamemode==2){
-                if(playerPlaying==Owner.GUEST){
+                if(playerPlaying!=Owner.HOST){
                     evaluateClick(e.getX(),e.getY());
                     try{
                     if(server!=null){
